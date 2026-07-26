@@ -250,9 +250,10 @@ app.use(express.static(path.join(__dirname, 'frontend/dist')));
 app.get('*', (req, res, next) => {
   // If it matches an API route, skip static index.html
   if (req.url.startsWith('/api')) return next();
-  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'), (err) => {
+  const indexPath = path.join(__dirname, 'frontend/dist/index.html');
+  res.sendFile(indexPath, (err) => {
     if (err) {
-      res.status(200).send("Aurelia Luxury Jewellery Server is running. Frontend dev server is available on port 5173.");
+      res.status(500).send(`Aurelia Luxury Server Error. Attempted Path: ${indexPath} | Error: ${err.message}`);
     }
   });
 });
