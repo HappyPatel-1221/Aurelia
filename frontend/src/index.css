@@ -1,0 +1,334 @@
+/* Core Design System for AURELIA Fine Jewellery */
+
+:root {
+  /* Color Palette */
+  --bg-primary: #070708;
+  --bg-secondary: #0e0e10;
+  --bg-tertiary: #16161a;
+  --bg-glass: rgba(14, 14, 16, 0.75);
+  
+  --gold-primary: #c5a059;
+  --gold-light: #f5e3c3;
+  --gold-dark: #8c6b2d;
+  --gold-glow: rgba(197, 160, 89, 0.25);
+  --gold-gradient: linear-gradient(135deg, #f5e3c3 0%, #c5a059 50%, #8c6b2d 100%);
+  
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --text-muted: #6e6e73;
+  
+  --border-muted: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(197, 160, 89, 0.3);
+  --border-gold-active: rgba(197, 160, 89, 0.8);
+  
+  /* Typography */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Montserrat", sans-serif;
+  
+  /* Layout Options */
+  --header-height: 80px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s ease;
+  
+  --shadow-glow: 0 0 20px rgba(197, 160, 89, 0.15);
+  --shadow-glow-strong: 0 0 30px rgba(197, 160, 89, 0.3);
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--bg-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Premium Animations & Micro-interactions */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.45);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes draw-border {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  50% {
+    width: 100%;
+    height: 0;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Button & Link Classes */
+.btn-gold {
+  background: var(--gold-gradient);
+  background-size: 200% auto;
+  color: #070708;
+  border: none;
+  padding: 12px 28px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  border-radius: 2px;
+}
+
+.btn-gold:hover {
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-strong);
+}
+
+.btn-gold:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-gold);
+  padding: 12px 28px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  border-radius: 2px;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.btn-outline:hover::before {
+  left: 100%;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  box-shadow: 0 0 15px rgba(197, 160, 89, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Glassmorphism containers */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-muted);
+}
+
+.glass-card-gold {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-gold);
+  transition: var(--transition-smooth);
+}
+
+.glass-card-gold:hover {
+  border-color: var(--gold-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+/* Text Shimmer Effect */
+.text-shimmer {
+  background: linear-gradient(
+    to right,
+    #ffffff 20%,
+    var(--gold-light) 40%,
+    var(--gold-primary) 60%,
+    #ffffff 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shimmer 5s linear infinite;
+}
+
+/* Animation utilities */
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Grid systems */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Custom visual stepper for tracking delivery */
+.stepper-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 40px 0;
+}
+
+.stepper-container::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--border-muted);
+  z-index: 1;
+}
+
+.stepper-progress {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  height: 2px;
+  background: var(--gold-primary);
+  z-index: 1;
+  transition: var(--transition-smooth);
+}
+
+.stepper-step {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+}
+
+.stepper-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  transition: var(--transition-smooth);
+}
+
+.stepper-step.active .stepper-circle {
+  border-color: var(--gold-primary);
+  color: var(--gold-primary);
+  box-shadow: 0 0 10px rgba(197, 160, 89, 0.3);
+}
+
+.stepper-step.completed .stepper-circle {
+  background: var(--gold-primary);
+  border-color: var(--gold-primary);
+  color: var(--bg-primary);
+}
+
+.stepper-label {
+  margin-top: 10px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.stepper-step.active .stepper-label {
+  color: var(--text-primary);
+  font-weight: 600;
+}
