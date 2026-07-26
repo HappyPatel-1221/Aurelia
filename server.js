@@ -10,8 +10,8 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 
-// Serve static assets from public/assets folder
-app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+// Serve static assets from frontend/public/assets folder
+app.use('/assets', express.static(path.join(__dirname, 'frontend/public/assets')));
 
 // Mock Products Database
 let products = [
