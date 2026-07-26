@@ -142,6 +142,7 @@ const styles = {
   },
   heroContent: {
     maxWidth: '640px',
+    position: 'relative',
     zIndex: 5,
   },
   heroSub: {
